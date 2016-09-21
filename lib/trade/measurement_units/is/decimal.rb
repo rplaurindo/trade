@@ -33,6 +33,14 @@ module Trade
           end
         end
 
+        def greater_unit_abreviation unit
+          unit_type = Decimal.unit_type unit
+          case unit_type.to_sym.downcase
+            when :volume; :l
+            when :mass; :kg
+          end
+        end
+
       end
 
     end

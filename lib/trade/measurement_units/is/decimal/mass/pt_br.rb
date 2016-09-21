@@ -9,7 +9,7 @@ module Trade
 
             extend self
 
-            def word_for_acronym
+            def word_for_abbreviation
               {kg: :quilo, g: :grama}
             end
 
@@ -21,5 +21,3 @@ module Trade
     end
   end
 end
-
-# p Trade::MeasurementUnits::IS::Decimal::Mass::PtBR.word_for_acronym

@@ -6,9 +6,9 @@ require "measurement_units/is/decimal"
 require "measurement_units/is/decimal/mass/pt_br"
 require "measurement_units/is/decimal/volume/pt_br"
 
-lib = File.expand_path('../../../../../../../measurement_units/lib/measurement_units', __FILE__)
-$LOAD_PATH.unshift(lib)
-require "is/decimal"
+# lib = File.expand_path('../../../../../../../measurement_units/lib/measurement_units', __FILE__)
+# $LOAD_PATH.unshift(lib)
+# require "is/decimal"
 
 module Trade
   module MeasurementUnits
@@ -81,8 +81,8 @@ module Trade
             end
 
             def weight_units
-              Decimal::Mass::PtBR.word_for_acronym.merge Decimal::Volume::PtBR
-                .word_for_acronym
+              Decimal::Mass::PtBR.word_for_abbreviation.merge Decimal::Volume::PtBR
+                .word_for_abbreviation
             end
 
         end

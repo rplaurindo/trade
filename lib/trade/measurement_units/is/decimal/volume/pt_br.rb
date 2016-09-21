@@ -9,7 +9,7 @@ module Trade
 
             extend self
 
-            def word_for_acronym
+            def word_for_abbreviation
               {l: :litro, ml: :ml}
             end
 
@@ -21,5 +21,3 @@ module Trade
     end
   end
 end
-
-# p Trade::MeasurementUnits::IS::Decimal::Volume::PtBR.word_for_acronym
