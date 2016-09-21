@@ -19,7 +19,7 @@ module Trade
 
           extend self
 
-          def humanize value, unit, decide_unit = false
+          def humanize value, unit, decide_unit = true
             decimal = ::MeasurementUnits::IS::Decimal
             unit_type = Decimal.unit_type unit
 
