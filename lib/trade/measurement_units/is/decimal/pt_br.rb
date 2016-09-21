@@ -48,19 +48,24 @@ module Trade
 
                 if decide_unit
                   value = decimal.to_units_after value, 3
-                    if value < 2
-                      unit = weight_units[:g]
-                    elsif value < 1000
-                      unit = pluralize weight_units[:g]
-                    else
-                      if value < 2000
-                        unit = weight_units[:kg]
-                      else
-                        unit = pluralize weight_units[:kg]
-                      end
 
-                      value = (value.to_f/1000).formated
+                  if value < 2
+                    unit = weight_units[:g]
+                  elsif value < 1000
+                    unit = pluralize weight_units[:g]
+                  else
+                    if value < 2000
+                      unit = weight_units[:kg]
+                    else
+                      unit = pluralize weight_units[:kg]
                     end
+
+                    value = (value.to_f/1000).formated
+                  end
+                elsif value < 2
+                  unit = unit.to_sym == :g ? weight_units[:g] : weight_units[:kg]
+                else
+                  unit = pluralize(unit.to_sym == :g ? weight_units[:g] : weight_units[:kg])
                 end
 
                 value = value.to_f.formated
@@ -86,21 +91,3 @@ module Trade
     end
   end
 end
-
-# aqui deveria mostrar 0.1 litro
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :ml
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :l
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :ml, true
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :l, true
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 1, :l
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 1.9, :l
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 2, :l
-
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :g
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :kg
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :g, true
-p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :kg, true
-# p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 1, :l, false
-# p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 1.9, :l, false
-# p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 2, :l, false
-# p Trade::MeasurementUnits::IS::Decimal::PtBR.humanize 0.1, :volume
