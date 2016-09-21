@@ -40,16 +40,18 @@ module Trade
                 if value < 2
                   return "#{value} #{weight_units[:g]}"
                 elsif value < 1000
-                  "#{value} #{pluralize weight_units[:g]}"
+                  return "#{value} #{pluralize weight_units[:g]}"
                 else
                   if value === 1000 || value < 2000
                     unit = weight_units[:kg]
                   else
                     unit = pluralize weight_units[:kg]
                   end
+                  return "#{(value.to_f/1000).formated} #{unit}"
+                # end
                 end if decide
 
-                "#{(value.to_f/1000).formated} #{unit}"
+                "#{(value.to_f).formated} #{unit}"
             end
 
           end
