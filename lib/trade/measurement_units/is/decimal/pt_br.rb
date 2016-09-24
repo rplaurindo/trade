@@ -6,9 +6,9 @@ require "measurement_units/is/decimal"
 require "measurement_units/is/decimal/mass/pt_br"
 require "measurement_units/is/decimal/volume/pt_br"
 
-# lib = File.expand_path('../../../../../../../measurement_units/lib/measurement_units', __FILE__)
-# $LOAD_PATH.unshift(lib)
-# require "is/decimal"
+lib = File.expand_path('../../../../../../../measurement_units/lib/measurement_units', __FILE__)
+$LOAD_PATH.unshift(lib)
+require "is/decimal"
 
 module Trade
   module MeasurementUnits
@@ -74,6 +74,16 @@ module Trade
 
           end
 
+          def weight_units_by_unit_type unit
+            unit_type = Decimal.unit_type unit
+            case unit_type.to_sym.downcase
+              when :volume; Decimal::Volume::PtBR
+                .word_for_abbreviation
+              when :mass; Decimal::Mass::PtBR
+                .word_for_abbreviation
+            end
+          end
+
           private
 
             def pluralize str
@@ -91,3 +101,5 @@ module Trade
     end
   end
 end
+
+# p Trade::MeasurementUnits::IS::Decimal::PtBR.weight_units_by_unit_type "kg"
