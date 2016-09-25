@@ -34,6 +34,16 @@ module Trade
                   else
                     unit = pluralize weight_units[:l]
                   end
+                elsif unit == :volume
+                  if value < 1000
+                    unit = weight_units[:ml]
+                  elsif value < 2000
+                    value = decimal.to_units_before(value, 3)
+                    unit = weight_units[:l]
+                  else
+                    value = decimal.to_units_before(value, 3)
+                    unit = pluralize weight_units[:l]
+                  end
                 elsif unit.to_sym == :l
                   if value < 2
                     unit = weight_units[:l]
@@ -46,7 +56,7 @@ module Trade
                 "#{value} #{unit}"
               when :mass then
 
-                if decide_unit
+                if unit == :mass || decide_unit
                   value = decimal.to_units_after value, 3
 
                   if value < 2
